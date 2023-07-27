@@ -2,10 +2,8 @@ module github.com/ffiat/melange
 
 go 1.19
 
-replace github.com/ffiat/nostr => ../nostr
-
 require (
-	github.com/ffiat/nostr v0.0.0-00010101000000-000000000000
+	github.com/ffiat/nostr v0.1.0
 	github.com/gorilla/websocket v1.5.0
 )
 
