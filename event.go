@@ -58,9 +58,12 @@ func (s *Event) Run() error {
 			}
 			defer cc.Close()
 
-			ok, err := cc.Publish(e, s.cfg.PrivateKey)
-			if ok != nil {
-				log.Printf("[\033[1;32m+\033[0m] Text note published: [status: %v]", ok.Ok)
+			msg, err := cc.Publish(e, s.cfg.PrivateKey)
+			if msg.Ok {
+				log.Println("[\033[1;32m+\033[0m] Text note published")
+				PrintJson(msg)
+			} else {
+				// TODO:
 			}
 			if err != nil {
 				return err

@@ -168,7 +168,6 @@ func (s *Connection) Publish(event nostr.Event, sk string) (*nostr.MessageOk, er
 			return nil, nil
 		case msg := <-s.okStream:
 			if msg.GetEventId() == event.GetId() {
-				log.Printf("ok: %v, id: %s, message: %s", msg.Ok, msg.GetEventId(), msg.Message)
 				return &msg, nil
 			}
 		}

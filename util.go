@@ -28,9 +28,9 @@ func ShowEvent(e *nostr.Event, author Author) {
 }
 
 func PrintJson(s any) {
-	jsonData, err := json.MarshalIndent(s, "", "    ")
+	data, err := json.MarshalIndent(s, "", "    ")
 	if err != nil {
 		fmt.Println("Error encoding JSON:", err)
 	}
-	fmt.Println(string(jsonData))
+	fmt.Printf("%s\n", data)
 }

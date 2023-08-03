@@ -3,7 +3,7 @@ module github.com/ffiat/melange
 go 1.19
 
 require (
-	github.com/ffiat/nostr v0.1.0
+	github.com/ffiat/nostr v0.1.1
 	github.com/gorilla/websocket v1.5.0
 )
 
