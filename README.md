@@ -51,6 +51,12 @@ ix event -note "hello friend"
 ix req -npub <npub...>
 ```
 
+3. Request a note via a specific event ID.
+
+```shell
+ix req -id <eventId>
+```
+
 ## Show Timeline
 
 1. Add users to follow, including yourself

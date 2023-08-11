@@ -16,6 +16,7 @@ func NewRequest(cfg *Config) *Request {
 		cfg: cfg,
 	}
 
+	gc.fs.StringVar(&gc.id, "id", "", "event ID of text note")
 	gc.fs.StringVar(&gc.npub, "npub", "", "event text note of Kind 1")
 	gc.fs.BoolVar(&gc.following, "following", false, "event text note of Kind 1")
 
@@ -26,6 +27,7 @@ type Request struct {
 	fs  *flag.FlagSet
 	cfg *Config
 
+	id        string
 	npub      string
 	following bool
 }
@@ -39,6 +41,41 @@ func (g *Request) Init(args []string) error {
 }
 
 func (s *Request) Run() error {
+
+	// TODO: For now just use the raw event. Later implement NIP-21
+	if s.id != "" {
+
+		f := nostr.Filter{
+			Ids:   []string{s.id},
+			Kinds: []uint32{nostr.KindTextNote},
+			Limit: 10,
+		}
+
+		for _, v := range s.cfg.Relays {
+
+			cc := NewConnection(v)
+			err := cc.Listen()
+			if err != nil {
+				log.Fatalf("unable to listen to relay: %v", err)
+			}
+			defer cc.Close()
+
+			sub, err := cc.Subscribe(nostr.Filters{f})
+			if err != nil {
+				log.Fatalf("\nunable to subscribe: %#v", err)
+			}
+
+			// This should be a single event
+			if len(sub.EventStream) != 1 {
+				log.Fatalf("more than one event was pulled: %d", len(sub.EventStream))
+			}
+
+			for event := range sub.EventStream {
+				fmt.Printf("  [%s]\n\n", event.CreatedAt.Time())
+				fmt.Printf("    └──  %s\n\n", event.Content)
+			}
+		}
+	}
 
 	if s.npub != "" {
 
@@ -69,6 +106,8 @@ func (s *Request) Run() error {
 			if err != nil {
 				log.Fatalf("\nunable to subscribe: %#v", err)
 			}
+
+            log.Printf("%d events found for %s", len(sub.EventStream), s.npub)
 
 			// FIXME: This is probabily a race condition
 
