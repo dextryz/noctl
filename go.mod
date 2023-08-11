@@ -1,4 +1,4 @@
-module github.com/ffiat/melange
+module github.com/ffiat/ixian
 
 go 1.19
 

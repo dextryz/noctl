@@ -1,6 +1,6 @@
-# Melange
+# Ixian
 
-Nostr terminal client the Unix way.
+[Ixian](https://dune.fandom.com/wiki/Ix) inspired by the Dune universe is a [Nostr](https://nostr.com) commandline tool done the [Unix way](https://en.wikipedia.org/wiki/Unix_philosophy).
 
 ## Create Profile
 
@@ -21,20 +21,20 @@ cipher -keygen
 3. Add this generated secret (`nsec`) to your local profile.
 
 ```shell
-melange profile -nsec <nsec...>
-melange profile -name "Alice"
+ix profile -nsec <nsec...>
+ix profile -name "Alice"
 ```
 
 5. Before you can fetch notes you have to add at least one relay.
 
 ```
-melange relay -add wss://nostr.ffiat.net
+ix relay -add wss://nostr.ffiat.net
 ```
 
 6. Now commit your profile to these relays.
 
 ```shell
-melange profile -commit
+ix profile -commit
 ```
 
 ## Publish Notes
@@ -42,13 +42,13 @@ melange profile -commit
 1. Publish your first text note.
 
 ```shell
-melange event -note "hello friend"
+ix event -note "hello friend"
 ```
 
 2. Request the note your just published using your npub.
 
 ```shell
-melange req -npub <npub...>
+ix req -npub <npub...>
 ```
 
 ## Show Timeline
@@ -56,11 +56,11 @@ melange req -npub <npub...>
 1. Add users to follow, including yourself
 
 ```
-melange follow -add <npub>
+ix follow -add <npub>
 ```
 
 7. Finally, echo your timeline of events pulled from your set of relays and followings.
 
 ```shell
-melange req -following
+ix req -following
 ```
