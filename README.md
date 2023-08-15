@@ -2,6 +2,10 @@
 
 [Ixian](https://dune.fandom.com/wiki/Ix) inspired by the Dune universe is a [Nostr](https://nostr.com) commandline tool done the [Unix way](https://en.wikipedia.org/wiki/Unix_philosophy).
 
+## TODO
+
+- [X] Request relay information via NIP-11
+
 ## Create Profile
 
 1. Create a new profile configuration.

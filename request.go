@@ -67,7 +67,7 @@ func (s *Request) Run() error {
 
 			// This should be a single event
 			if len(sub.EventStream) != 1 {
-				log.Fatalf("more than one event was pulled: %d", len(sub.EventStream))
+//				log.Fatalf("more than one event was pulled: %d", len(sub.EventStream))
 			}
 
 			for event := range sub.EventStream {

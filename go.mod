@@ -2,6 +2,8 @@ module github.com/ffiat/ixian
 
 go 1.19
 
+replace github.com/ffiat/nostr => ../nostr
+
 require (
 	github.com/ffiat/nostr v0.1.1
 	github.com/gorilla/websocket v1.5.0
