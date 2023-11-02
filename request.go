@@ -67,7 +67,7 @@ func (s *Request) Run() error {
 
 			// This should be a single event
 			if len(sub.EventStream) != 1 {
-//				log.Fatalf("more than one event was pulled: %d", len(sub.EventStream))
+				//				log.Fatalf("more than one event was pulled: %d", len(sub.EventStream))
 			}
 
 			for event := range sub.EventStream {
@@ -107,7 +107,7 @@ func (s *Request) Run() error {
 				log.Fatalf("\nunable to subscribe: %#v", err)
 			}
 
-            log.Printf("%d events found for %s", len(sub.EventStream), s.npub)
+			log.Printf("%d events found for %s", len(sub.EventStream), s.npub)
 
 			// FIXME: This is probabily a race condition
 

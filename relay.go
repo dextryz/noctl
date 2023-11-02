@@ -31,7 +31,7 @@ type Relay struct {
 	fs  *flag.FlagSet
 	cfg *Config
 
-	info    string
+	info   string
 	add    string
 	remove string
 }
@@ -46,44 +46,44 @@ func (g *Relay) Init(args []string) error {
 
 func (s *Relay) Run() error {
 
-    if s.info != "" {
+	if s.info != "" {
 
-        ctx := context.Background()
+		ctx := context.Background()
 
-        // normalize URL to start with http:// or https://
-        if !strings.HasPrefix(s.info, "http") && !strings.HasPrefix(s.info, "ws") {
-            s.info = "wss://" + s.info
-        }
-        p, err := url.Parse(s.info)
-        if err != nil {
-            return fmt.Errorf("Cannot parse url: %s", s.info)
-        }
-        if p.Scheme == "ws" {
-            p.Scheme = "http"
-        } else if p.Scheme == "wss" {
-            p.Scheme = "https"
-        }
-        p.Path = strings.TrimRight(p.Path, "/")
+		// normalize URL to start with http:// or https://
+		if !strings.HasPrefix(s.info, "http") && !strings.HasPrefix(s.info, "ws") {
+			s.info = "wss://" + s.info
+		}
+		p, err := url.Parse(s.info)
+		if err != nil {
+			return fmt.Errorf("Cannot parse url: %s", s.info)
+		}
+		if p.Scheme == "ws" {
+			p.Scheme = "http"
+		} else if p.Scheme == "wss" {
+			p.Scheme = "https"
+		}
+		p.Path = strings.TrimRight(p.Path, "/")
 
-        req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.String(), nil)
+		req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.String(), nil)
 
-        // add the NIP-11 header
-        req.Header.Add("Accept", "application/nostr+json")
+		// add the NIP-11 header
+		req.Header.Add("Accept", "application/nostr+json")
 
-        // send the request
-        resp, err := http.DefaultClient.Do(req)
-        if err != nil {
-            return err
-        }
+		// send the request
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			return err
+		}
 
-        info := &nostr.RelayInformation{}
-        err = json.NewDecoder(resp.Body).Decode(info)
-        if err != nil {
-            return err
-        }
+		info := &nostr.RelayInformation{}
+		err = json.NewDecoder(resp.Body).Decode(info)
+		if err != nil {
+			return err
+		}
 
-        PrintJson(info)
-    }
+		PrintJson(info)
+	}
 
 	if s.add != "" {
 		s.cfg.AddRelay(s.add)

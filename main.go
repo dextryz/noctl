@@ -37,6 +37,7 @@ func main() {
 		NewEvent(cfg),
 		NewRequest(cfg),
 		NewFollow(cfg),
+		NewCategory(cfg),
 	}
 
 	subcommand := os.Args[1]

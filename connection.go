@@ -109,7 +109,7 @@ func (s *Connection) Listen() error {
 			switch msg.Type() {
 			case "EVENT":
 
-                log.Println("Incoming message Read")
+				log.Println("Incoming message Read")
 
 				m := msg.(*nostr.MessageEvent)
 
