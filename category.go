@@ -54,7 +54,13 @@ func (s *Category) Run() error {
 	tags = append(tags, nostr.Tag{"d", s.name})
 
 	for _, key := range pubkeys {
-		t := nostr.Tag{"p", key}
+
+		pk, err := nostr.DecodeBech32(key)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		t := nostr.Tag{"p", pk.(string)}
 		tags = append(tags, t)
 	}
 
@@ -83,9 +89,12 @@ func (s *Category) Run() error {
 		msg, err := cc.Publish(e, s.cfg.PrivateKey)
 		if msg.Ok {
 			log.Println("[\033[1;32m+\033[0m] Category note published")
-			PrintJson(msg)
+			log.Println(msg)
 		} else {
 			// TODO:
+			log.Println("What")
+			log.Println(msg)
+			log.Println(err)
 		}
 		if err != nil {
 			return err

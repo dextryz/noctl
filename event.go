@@ -61,7 +61,8 @@ func (s *Event) Run() error {
 			msg, err := cc.Publish(e, s.cfg.PrivateKey)
 			if msg.Ok {
 				log.Println("[\033[1;32m+\033[0m] Text note published")
-				PrintJson(msg)
+				//PrintJson(msg)
+				log.Println(msg)
 			} else {
 				// TODO:
 			}

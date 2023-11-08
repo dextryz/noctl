@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/ffiat/nostr"
 )
@@ -18,6 +17,7 @@ func NewRequest(cfg *Config) *Request {
 
 	gc.fs.StringVar(&gc.id, "id", "", "event ID of text note")
 	gc.fs.StringVar(&gc.npub, "npub", "", "event text note of Kind 1")
+	gc.fs.IntVar(&gc.kind, "kind", 1, "set event kind to be pulled from relays")
 	gc.fs.BoolVar(&gc.following, "following", false, "event text note of Kind 1")
 
 	return gc
@@ -29,6 +29,7 @@ type Request struct {
 
 	id        string
 	npub      string
+	kind      int
 	following bool
 }
 
@@ -87,8 +88,9 @@ func (s *Request) Run() error {
 		// List only the latest 3 event from the author.
 		f := nostr.Filter{
 			Authors: []string{pk.(string)},
-			Kinds:   []uint32{nostr.KindTextNote},
-			Limit:   10,
+			//Kinds:   []uint32{nostr.KindTextNote},
+			Kinds: []uint32{uint32(s.kind)},
+			Limit: 10,
 		}
 
 		for _, v := range s.cfg.Relays {
@@ -109,13 +111,27 @@ func (s *Request) Run() error {
 
 			log.Printf("%d events found for %s", len(sub.EventStream), s.npub)
 
-			// FIXME: This is probabily a race condition
+			orDone := func(done <-chan struct{}, c <-chan *nostr.Event) <-chan *nostr.Event {
+				valStream := make(chan *nostr.Event)
+				go func() {
+					defer close(valStream)
+					for {
+						select {
+						case <-done:
+							return
+						case v, ok := <-c:
+							if ok == false {
+								return
+							}
+							valStream <- v
+						}
+					}
+				}()
+				return valStream
+			}
 
-			time.Sleep(1 * time.Second)
-
-			for event := range sub.EventStream {
-				fmt.Printf("  [%s]\n\n", event.CreatedAt.Time())
-				fmt.Printf("    ⤷  %s\n\n", event.Content)
+			for e := range orDone(sub.Done, sub.EventStream) {
+				PrintJson(e)
 			}
 		}
 	}
