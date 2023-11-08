@@ -55,8 +55,8 @@ func (s *Profile) Run() error {
 	if s.nsec != "" {
 
 		var sk string
-		if value, e := nostr.DecodeBech32(s.nsec); e == nil {
-			sk = value.(string)
+		if _, value, e := nostr.DecodeBech32(s.nsec); e == nil {
+			sk = value
 		}
 
 		// Update secret

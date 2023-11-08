@@ -55,12 +55,12 @@ func (s *Category) Run() error {
 
 	for _, key := range pubkeys {
 
-		pk, err := nostr.DecodeBech32(key)
+		_, pk, err := nostr.DecodeBech32(key)
 		if err != nil {
 			log.Fatalln(err)
 		}
 
-		t := nostr.Tag{"p", pk.(string)}
+		t := nostr.Tag{"p", pk}
 		tags = append(tags, t)
 	}
 

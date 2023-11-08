@@ -38,6 +38,8 @@ func main() {
 		NewRequest(cfg),
 		NewFollow(cfg),
 		NewCategory(cfg),
+		NewEncode(cfg),
+		NewKey(cfg),
 	}
 
 	subcommand := os.Args[1]

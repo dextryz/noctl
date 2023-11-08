@@ -74,3 +74,24 @@ ix follow -add <npub>
 ```shell
 ix req -following
 ```
+
+## Key Management
+
+```shell
+> ix encode -note 9ccec662f0a0bb3e00231134af8e7222249073bd30896a62fc1fcd5de513f8ef
+note1nn8vvchs5zanuqprzy62lrnjygjfquaaxzyk5churlx4megnlrhsf44pp7
+
+> ix encode -npub a07b13f189d309c36a399d208208d09863b231c3745bd9d63d4de4339ab540a5
+npub15pa38uvf6vyux63en5sgyzxsnp3myvwrw3dan43afhjr8x44gzjse75plm
+```
+
+```shell
+> ix key -new
+nsec: nsec1qfczae3envq7rldt8rpvtf99xu0rq7kq8ua26tw89r0c57722kuqhd4lsc
+npub: npub1yejfe5ujj03elm62m9pek9wau8tp3qzd3cjvmn8gqlnx3846qz4s453w6w
+```
+
+```shell
+> ix key -decode npub15pa38uvf6vyux63en5sgyzxsnp3myvwrw3dan43afhjr8x44gzjse75plm
+a07b13f189d309c36a399d208208d09863b231c3745bd9d63d4de4339ab540a5
+```

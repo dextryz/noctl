@@ -80,14 +80,14 @@ func (s *Request) Run() error {
 
 	if s.npub != "" {
 
-		pk, err := nostr.DecodeBech32(s.npub)
+		_, pk, err := nostr.DecodeBech32(s.npub)
 		if err != nil {
 			log.Fatalf("\nunable to decode npub: %#v", err)
 		}
 
 		// List only the latest 3 event from the author.
 		f := nostr.Filter{
-			Authors: []string{pk.(string)},
+			Authors: []string{pk},
 			//Kinds:   []uint32{nostr.KindTextNote},
 			Kinds: []uint32{uint32(s.kind)},
 			Limit: 10,
@@ -157,14 +157,14 @@ func (s *Request) Run() error {
 
 			for _, author := range config.Following {
 
-				pk, err := nostr.DecodeBech32(author.PublicKey)
+				_, pk, err := nostr.DecodeBech32(author.PublicKey)
 				if err != nil {
 					log.Fatalf("\nunable to decode npub: %#v", err)
 				}
 
 				// List only the latest 3 event from the author.
 				f := nostr.Filter{
-					Authors: []string{pk.(string)},
+					Authors: []string{pk},
 					Kinds:   []uint32{nostr.KindTextNote},
 					Limit:   10,
 				}
