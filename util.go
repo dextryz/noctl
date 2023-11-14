@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ffiat/nostr"
+	"github.com/dextryz/nostr"
 )
 
 func StringEnv(key string) string {

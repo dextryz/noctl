@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/ffiat/nostr"
+	"github.com/dextryz/nostr"
 )
 
 func NewCategory(cfg *Config) *Category {

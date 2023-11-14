@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/ffiat/nostr"
+	"github.com/dextryz/nostr"
 	"github.com/gorilla/websocket"
 )
 

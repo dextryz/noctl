@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/ffiat/nostr"
+	"github.com/dextryz/nostr"
 )
 
 func NewProfile(cfg *Config) *Profile {

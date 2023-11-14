@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ffiat/nostr"
+	"github.com/dextryz/nostr"
 )
 
 func NewEncode(cfg *Config) *Encode {
@@ -56,7 +56,7 @@ func (s *Encode) Run() error {
 	} else if s.note != "" {
 		key, err := nostr.EncodeNote(s.note)
 		if err != nil {
-            log.Fatalf("unable to encode note: %v", err)
+			log.Fatalf("unable to encode note: %v", err)
 		}
 		fmt.Println(key)
 	} else {

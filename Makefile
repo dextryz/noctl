@@ -3,4 +3,4 @@ fmt:
 	gofmt -l -s -w .
 
 build:
-	go build -o ./ix ./*.go
+	go build -o ./lemon ./*.go

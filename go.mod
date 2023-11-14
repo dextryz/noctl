@@ -1,11 +1,9 @@
-module github.com/ffiat/ixian
+module github.com/dextryz/lemon
 
-go 1.19
-
-replace github.com/ffiat/nostr => ../nostr
+go 1.21.0
 
 require (
-	github.com/ffiat/nostr v0.1.1
+	github.com/dextryz/nostr v0.2.0
 	github.com/gorilla/websocket v1.5.0
 )
 

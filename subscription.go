@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"sync/atomic"
 
-	"github.com/ffiat/nostr"
+	"github.com/dextryz/nostr"
 )
 
 var subId atomic.Int32

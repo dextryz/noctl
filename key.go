@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ffiat/nostr"
+	"github.com/dextryz/nostr"
 )
 
 func NewKey(cfg *Config) *Key {

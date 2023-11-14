@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ffiat/nostr"
+	"github.com/dextryz/nostr"
 )
 
 type Config struct {

@@ -19,26 +19,26 @@ touch $CONFIG_NOSTR
 2. Generate a private-public key pair with the [cipher](https://github.com/ffiat/cipher) commandline tool.
 
 ```shell
-cipher -keygen
+lemon -keygen
 ```
 
 3. Add this generated secret (`nsec`) to your local profile.
 
 ```shell
-ix profile -nsec <nsec...>
-ix profile -name "Alice"
+lemon profile -nsec <nsec...>
+lemon profile -name "Alice"
 ```
 
 5. Before you can fetch notes you have to add at least one relay.
 
 ```
-ix relay -add wss://nostr.ffiat.net
+lemon relay -add wss://nostr.ffiat.net
 ```
 
 6. Now commit your profile to these relays.
 
 ```shell
-ix profile -commit
+lemon profile -commit
 ```
 
 ## Publish Notes
@@ -46,19 +46,19 @@ ix profile -commit
 1. Publish your first text note.
 
 ```shell
-ix event -note "hello friend"
+lemon event -note "hello friend"
 ```
 
 2. Request the note your just published using your npub.
 
 ```shell
-ix req -npub <npub...>
+lemon req -npub <npub...>
 ```
 
 3. Request a note via a specific event ID.
 
 ```shell
-ix req -id <eventId>
+lemon req -id <eventId>
 ```
 
 ## Show Timeline
@@ -66,32 +66,32 @@ ix req -id <eventId>
 1. Add users to follow, including yourself
 
 ```
-ix follow -add <npub>
+lemon follow -add <npub>
 ```
 
 7. Finally, echo your timeline of events pulled from your set of relays and followings.
 
 ```shell
-ix req -following
+lemon req -following
 ```
 
 ## Key Management
 
 ```shell
-> ix encode -note 9ccec662f0a0bb3e00231134af8e7222249073bd30896a62fc1fcd5de513f8ef
+> lemon encode -note 9ccec662f0a0bb3e00231134af8e7222249073bd30896a62fc1fcd5de513f8ef
 note1nn8vvchs5zanuqprzy62lrnjygjfquaaxzyk5churlx4megnlrhsf44pp7
 
-> ix encode -npub a07b13f189d309c36a399d208208d09863b231c3745bd9d63d4de4339ab540a5
+> lemon encode -npub a07b13f189d309c36a399d208208d09863b231c3745bd9d63d4de4339ab540a5
 npub15pa38uvf6vyux63en5sgyzxsnp3myvwrw3dan43afhjr8x44gzjse75plm
 ```
 
 ```shell
-> ix key -new
+> lemon key -new
 nsec: nsec1qfczae3envq7rldt8rpvtf99xu0rq7kq8ua26tw89r0c57722kuqhd4lsc
 npub: npub1yejfe5ujj03elm62m9pek9wau8tp3qzd3cjvmn8gqlnx3846qz4s453w6w
 ```
 
 ```shell
-> ix key -decode npub15pa38uvf6vyux63en5sgyzxsnp3myvwrw3dan43afhjr8x44gzjse75plm
+> lemon key -decode npub15pa38uvf6vyux63en5sgyzxsnp3myvwrw3dan43afhjr8x44gzjse75plm
 a07b13f189d309c36a399d208208d09863b231c3745bd9d63d4de4339ab540a5
 ```
