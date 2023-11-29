@@ -40,6 +40,7 @@ func main() {
 		NewCategory(cfg),
 		NewEncode(cfg),
 		NewKey(cfg),
+		NewSummarize(cfg),
 	}
 
 	subcommand := os.Args[1]

@@ -8,6 +8,8 @@ import (
 	"github.com/dextryz/nostr"
 )
 
+// > nix req -npub npub15pa38uvf6vyux63en5sgyzxsnp3myvwrw3dan43afhjr8x44gzjse75plm -kind 5001
+
 func NewRequest(cfg *Config) *Request {
 
 	gc := &Request{
